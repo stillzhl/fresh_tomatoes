@@ -3,23 +3,23 @@
 
 import httplib
 
-# entertainment center
-import entm_cnt
+from entertainment import movies
 
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__) 
 
 
 @app.route("/")
 def fresh_tomatoes():
-    return "index.html"
+    return render_template("index.html")
 
 
 @app.route("/movie/<title>")
 def movie(title):
     resource = None
-    movie = entm_cnt.movies.get(title, None)
+    movie = movies.get(title, None)
     if not movie:
         status_code = httplib.NOT_FOUND
     else:
